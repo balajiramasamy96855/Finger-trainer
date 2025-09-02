@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Typing Trainer with Finger Hints</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Typing Trainer</h1>
+      <div class="controls">
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <select id="duration">
+          <option value="15">15 sec</option>
+          <option value="30" selected>30 sec</option>
+          <option value="60">1 min</option>
+        </select>
+        <select id="mode">
+          <option value="sentences" selected>Sentences</option>
+          <option value="words">Words</option>
+          <option value="custom">Custom</option>
+        </select>
+        <button id="startBtn" class="primary">Start</button>
+        <button id="resetBtn" class="ghost">Reset</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <section class="panel">
+        <strong>Type the text below <span id="timeDisplay" class="small-muted">00:30</span></strong>
+        <div class="meter"><i id="meterBar"></i></div>
+
+        <div id="target" class="target">Click Start (or paste custom text)</div>
+
+        <textarea id="input" placeholder="Start typing here..." disabled></textarea>
+
+        <div class="custom-area" id="customArea" style="display:none;">
+          <div class="small-muted">Custom passage</div>
+          <textarea id="customText" placeholder="Paste your paragraph here..."></textarea>
+          <button id="useCustom" class="primary">Use This</button>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <strong>Live stats</strong>
+        <div class="stats">
+          <div class="stat"><div class="small-muted">WPM</div><div id="wpm" class="num">0</div></div>
+          <div class="stat"><div class="small-muted">Accuracy</div><div id="acc" class="num">100%</div></div>
+          <div class="stat"><div class="small-muted">Chars</div><div id="chars" class="num">0</div></div>
+          <div class="stat"><div class="small-muted">Errors</div><div id="errs" class="num">0</div></div>
+        </div>
+
+        <div>
+          <div class="small-muted">Next char</div>
+          <div id="nextChar" class="hintbox">—</div>
+        </div>
+
+        <div>
+          <div class="small-muted">Finger to use</div>
+          <div id="fingerHint" class="hintbox">—</div>
+        </div>
+
+        <!-- Hand Diagram -->
+        <svg id="handDiagram" viewBox="0 0 500 200" width="100%" style="margin-top:10px">
+          <rect id="leftPinky" x="20" y="20" width="40" height="100" rx="8" fill="#e0e0e0"/>
+          <rect id="leftRing"  x="70" y="20" width="40" height="100" rx="8" fill="#e0e0e0"/>
+          <rect id="leftMiddle"x="120" y="20" width="40" height="100" rx="8" fill="#e0e0e0"/>
+          <rect id="leftIndex" x="170" y="20" width="40" height="100" rx="8" fill="#e0e0e0"/>
+          <rect id="rightIndex"x="230" y="20" width="40" height="100" rx="8" fill="#e0e0e0"/>
+          <rect id="rightMiddle"x="280" y="20" width="40" height="100" rx="8" fill="#e0e0e0"/>
+          <rect id="rightRing"  x="330" y="20" width="40" height="100" rx="8" fill="#e0e0e0"/>
+          <rect id="rightPinky" x="380" y="20" width="40" height="100" rx="8" fill="#e0e0e0"/>
+          <rect id="thumbs"     x="200" y="140" width="100" height="40" rx="8" fill="#e0e0e0"/>
+        </svg>
+      </aside>
+    </div>
+
+    <section class="leaderboard panel">
+      <h2>Leaderboard (Local Top 5)</h2>
+      <table id="leaderTable">
+        <thead><tr><th>Rank</th><th>WPM</th><th>Accuracy</th><th>Time</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
